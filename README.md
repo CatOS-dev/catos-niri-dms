@@ -25,7 +25,6 @@ The Profile owns and refreshes these paths:
 
 ```text
 .config/niri/config.kdl
-.config/niri/dms/binds.kdl
 .config/environment.d/80-catos-niri.conf
 .gtkrc-2.0
 .config/gtk-3.0/settings.ini
@@ -43,9 +42,11 @@ catdot update catos-niri-dms
 ## Seed configuration
 
 All other files under `/usr/share/catos-niri-dms` are initial Profile seeds.
-They initialize Ghostty and the user-editable DMS fragments for colors, layout,
-Alt-Tab, outputs, cursor behavior, and window rules. Later selections and
-updates preserve user changes to those seed files.
+The managed main Niri config includes DMS fragments plus the profile-scoped
+`~/.config/niri/custom/catos-niri-dms/` directory. Its `input.kdl`,
+`outputs.kdl`, and `rules.kdl` files are seeded once and are never managed, so
+later selections and updates preserve user changes. DMS-generated fragments and
+Ghostty configuration remain seeds as well.
 
 Niri starts Xwayland Satellite and DMS directly from `config.kdl`. Terminal and
 launcher bindings invoke Ghostty and DMS directly; no Catdot runtime wrapper is

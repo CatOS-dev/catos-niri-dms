@@ -1,0 +1,8 @@
+// Profile-scoped output settings.
+// Catdot seeds this file once and does not manage later edits.
+// Add output blocks here after checking names with `niri msg outputs`.
+
+// Example:
+// output "eDP-1" {
+//     scale 1.25
+// }

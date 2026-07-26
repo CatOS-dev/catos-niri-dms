@@ -1,0 +1,8 @@
+// Profile-scoped user window and layer rules.
+// Catdot seeds this file once and does not manage later edits.
+
+// Example:
+// window-rule {
+//     match app-id="example"
+//     open-floating true
+// }

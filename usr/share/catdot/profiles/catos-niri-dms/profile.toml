@@ -18,13 +18,12 @@ packages = [
   "ghostty",
   "xwayland-satellite",
   "catos-graphite-gtk-theme",
-  "catos-tela-icon-theme-blue",
+  "tela-circle-icon-theme-all",
   "catos-bibata-cursor",
 ]
 
 manage = [
   ".config/niri/config.kdl",
-  ".config/niri/dms/binds.kdl",
   ".config/environment.d/80-catos-niri.conf",
   ".gtkrc-2.0",
   ".config/gtk-3.0/settings.ini",
