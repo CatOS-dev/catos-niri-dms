@@ -7,9 +7,6 @@ The repository contains the installed Profile tree directly:
 ```text
 usr/share/catdot/profiles/catos-niri-dms/profile.toml
 usr/share/catos-niri-dms/...
-usr/bin/catos-niri-pick
-usr/bin/catos-niri-keybinds
-usr/bin/catos-screenshot-edit
 ```
 
 Select the Profile with:
@@ -21,6 +18,9 @@ catdot select catos-niri-dms
 Catdot installs the exact package names declared by the Profile and maps the
 content below `/usr/share/catos-niri-dms` into the user's HOME. Switching a
 Profile does not restart applications or the desktop session.
+
+The global Niri helper commands are owned by the separate `catos-niri-utils`
+package. This Profile package does not install executables into `/usr/bin`.
 
 ## Configuration ownership
 
