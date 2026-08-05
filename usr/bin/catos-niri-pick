@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+notify_error() {
+    notify-send --app-name='CatOS Niri Pick' --urgency=critical 'CatOS Niri Pick' "$1" 2>/dev/null || true
+    printf 'catos-niri-pick: %s\n' "$1" >&2
+}
+
+notify_copy() {
+    notify-send --app-name='CatOS Niri Pick' 'Copied to clipboard' "$1" 2>/dev/null || true
+}
+
+for command in niri jq fuzzel wl-copy; do
+    if ! command -v "$command" >/dev/null 2>&1; then
+        notify_error "Missing command: $command"
+        exit 1
+    fi
+done
+
+copy_value() {
+    local value=$1
+    local label=$2
+    if [[ -z "$value" || "$value" == "null" ]]; then
+        notify_error "No value was selected"
+        exit 1
+    fi
+    printf '%s' "$value" | wl-copy
+    notify_copy "$label: $value"
+    printf '%s\n' "$value"
+}
+
+pick_window_value() {
+    local field=$1
+    local window_json
+    window_json=$(niri msg -j pick-window) || exit 0
+    [[ -n "$window_json" ]] || exit 0
+
+    case "$field" in
+        info) copy_value "$(jq . <<<"$window_json")" 'Window information' ;;
+        title) copy_value "$(jq -r '.title // empty' <<<"$window_json")" 'Window title' ;;
+        app_id) copy_value "$(jq -r '.app_id // empty' <<<"$window_json")" 'Window App ID' ;;
+        pid) copy_value "$(jq -r '.pid // empty' <<<"$window_json")" 'Window PID' ;;
+    esac
+}
+
+pick_color_value() {
+    local format=$1
+    local color_json rgb_values red green blue hex
+    color_json=$(niri msg -j pick-color) || exit 0
+    [[ -n "$color_json" && "$color_json" != "null" ]] || exit 0
+
+    rgb_values=$(jq -r '.rgb | map((. * 255) | round) | @tsv' <<<"$color_json")
+    read -r red green blue <<<"$rgb_values"
+    [[ "$red" =~ ^[0-9]+$ && "$green" =~ ^[0-9]+$ && "$blue" =~ ^[0-9]+$ ]] || {
+        notify_error 'Niri returned an unsupported color value'
+        exit 1
+    }
+
+    printf -v hex '#%02X%02X%02X' "$red" "$green" "$blue"
+
+    if [[ "$format" == hex ]]; then
+        copy_value "$hex" 'Color HEX'
+        return
+    fi
+    copy_value "rgb($red, $green, $blue)" 'Color RGB'
+}
+
+case "${1:-menu}" in
+    info|title|app_id|pid)
+        pick_window_value "$1"
+        ;;
+    hex|rgb)
+        pick_color_value "$1"
+        ;;
+    menu)
+        choice=$(printf '%s\n' \
+            'Window information' \
+            'Window title' \
+            'Window App ID' \
+            'Window PID' \
+            'Color HEX' \
+            'Color RGB' \
+            | fuzzel --dmenu --index --prompt='Pick and copy> ') \
+            || exit 0
+        case "$choice" in
+            0) pick_window_value info ;;
+            1) pick_window_value title ;;
+            2) pick_window_value app_id ;;
+            3) pick_window_value pid ;;
+            4) pick_color_value hex ;;
+            5) pick_color_value rgb ;;
+            *) exit 0 ;;
+        esac
+        ;;
+    -h|--help|help)
+        cat <<'EOF'
+Usage: catos-niri-pick [menu|info|title|app_id|pid|hex|rgb]
+
+Window fields are read from Niri JSON output. Colors are selected with Niri's
+native color picker. The selected value is copied with wl-copy.
+EOF
+        ;;
+    *)
+        notify_error "Unknown command: $1"
+        exit 2
+        ;;
+esac

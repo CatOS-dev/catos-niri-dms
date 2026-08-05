@@ -1,0 +1,24 @@
+// Session behavior and processes owned by the CatOS Niri Profile.
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+environment {
+    XDG_CURRENT_DESKTOP "niri"
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+prefer-no-csd
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+debug {
+    honor-xdg-activation-with-invalid-serial
+}
+
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "dms" "run" "--session"

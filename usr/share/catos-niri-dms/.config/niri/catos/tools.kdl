@@ -1,0 +1,19 @@
+binds {
+    Mod+Slash hotkey-overlay-title="Search Keybindings" {
+        spawn "catos-niri-keybinds";
+    }
+
+    Mod+Ctrl+P hotkey-overlay-title="Pick Window Information or Color" {
+        spawn "catos-niri-pick";
+    }
+
+    Shift+Print hotkey-overlay-title="Edit Region Screenshot" {
+        spawn "catos-screenshot-edit" "region";
+    }
+    Ctrl+Shift+Print hotkey-overlay-title="Edit Output Screenshot" {
+        spawn "catos-screenshot-edit" "full";
+    }
+    Alt+Shift+Print hotkey-overlay-title="Edit Window Screenshot" {
+        spawn "catos-screenshot-edit" "window";
+    }
+}

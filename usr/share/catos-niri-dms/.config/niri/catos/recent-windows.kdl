@@ -1,0 +1,22 @@
+// Preserve CatOS Alt+Tab semantics while enabling Niri window previews.
+recent-windows {
+    debounce-ms 750
+    open-delay-ms 150
+
+    highlight {
+        padding 30
+        corner-radius 12
+    }
+
+    previews {
+        max-height 480
+        max-scale 0.2
+    }
+
+    binds {
+        Alt+Tab         { next-window scope="output"; }
+        Alt+Shift+Tab   { previous-window scope="output"; }
+        Alt+grave       { next-window filter="app-id"; }
+        Alt+Shift+grave { previous-window filter="app-id"; }
+    }
+}

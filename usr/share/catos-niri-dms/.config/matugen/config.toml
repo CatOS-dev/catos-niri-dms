@@ -1,0 +1,18 @@
+[config]
+
+[templates.catos_fcitx5]
+input_path = '~/.config/matugen/templates/catos/fcitx5-theme.conf'
+output_path = '~/.local/share/fcitx5/themes/CatOS-Matugen/theme.conf'
+post_hook = 'fcitx5 -r >/dev/null 2>&1 || true'
+
+[templates.catos_fuzzel]
+input_path = '~/.config/matugen/templates/catos/fuzzel.ini'
+output_path = '~/.config/fuzzel/catos-colors.ini'
+
+[templates.catos_btop]
+input_path = '~/.config/matugen/templates/catos/btop.theme'
+output_path = '~/.config/btop/themes/catos-matugen.theme'
+
+[templates.catos_cava]
+input_path = '~/.config/matugen/templates/catos/cava-colors.ini'
+output_path = '~/.config/cava/themes/catos-matugen'

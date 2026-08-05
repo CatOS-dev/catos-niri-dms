@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+for command in dms jq fuzzel; do
+    if ! command -v "$command" >/dev/null 2>&1; then
+        printf 'catos-niri-keybinds: missing command: %s\n' "$command" >&2
+        exit 1
+    fi
+done
+
+keybinds_json=$(dms keybinds show niri)
+menu_items=$(jq -r '
+    .binds
+    | to_entries[]
+    | .key as $group
+    | .value[]
+    | [
+        .key,
+        (if (.desc // "") != "" then .desc else (.action // "") end),
+        $group
+      ]
+    | @tsv
+' <<<"$keybinds_json")
+
+if [[ -z "$menu_items" ]]; then
+    printf 'catos-niri-keybinds: DMS returned no Niri keybindings\n' >&2
+    exit 1
+fi
+
+printf '%s\n' "$menu_items" \
+    | fuzzel --dmenu --prompt='Keybindings> ' --width=72 --lines=18 >/dev/null \
+    || true

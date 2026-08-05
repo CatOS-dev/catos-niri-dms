@@ -1,9 +1,9 @@
-# Default GTK 2 settings for CatOS. Appearance tools may rewrite this file.
-gtk-theme-name="Graphite-blue-Dark-nord"
-gtk-icon-theme-name="Tela-circle-dark"
+# GTK 2 compatibility settings. GTK 2 has no adw-gtk3 equivalent, so CatOS
+# leaves the widget theme to GTK's fallback while keeping shared appearance.
+gtk-icon-theme-name="Tela-circle-blue-dark"
 gtk-font-name="Sans 10"
-gtk-cursor-theme-name=""
-gtk-cursor-theme-size=0
+gtk-cursor-theme-name="Bibata-Modern-Ice"
+gtk-cursor-theme-size=24
 gtk-toolbar-style=3
 gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
 gtk-button-images=0

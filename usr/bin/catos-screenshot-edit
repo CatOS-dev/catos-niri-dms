@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+mode=${1:-region}
+case "$mode" in
+    region|full|window|all) ;;
+    *)
+        printf 'Usage: catos-screenshot-edit [region|full|window|all]\n' >&2
+        exit 2
+        ;;
+esac
+
+for command in dms satty wl-copy; do
+    if ! command -v "$command" >/dev/null 2>&1; then
+        printf 'catos-screenshot-edit: missing command: %s\n' "$command" >&2
+        exit 1
+    fi
+done
+
+dms screenshot "$mode" --stdout --no-file --no-clipboard --no-notify \
+    | satty --filename -
