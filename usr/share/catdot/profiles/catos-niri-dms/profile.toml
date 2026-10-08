@@ -7,7 +7,7 @@ packages = [
   "xdg-desktop-portal-gtk",
   "xdg-desktop-portal-gnome",
   "gnome-keyring",
-  "dms-shell-niri",
+  "dms-shell",
   "catos-niri-utils",
   "matugen",
   "adw-gtk-theme",
