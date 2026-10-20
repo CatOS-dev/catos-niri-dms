@@ -3,7 +3,7 @@
 [templates.catos_fcitx5]
 input_path = '~/.config/matugen/templates/catos/fcitx5-theme.conf'
 output_path = '~/.local/share/fcitx5/themes/CatOS-Matugen/theme.conf'
-post_hook = 'fcitx5 -r >/dev/null 2>&1 || true'
+post_hook = 'fcitx5-remote -r >/dev/null 2>&1 || true'
 
 [templates.catos_fuzzel]
 input_path = '~/.config/matugen/templates/catos/fuzzel.ini'
