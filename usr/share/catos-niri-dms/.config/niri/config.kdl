@@ -19,6 +19,9 @@ include optional=true "dms/alttab.kdl"
 include optional=true "dms/binds.kdl"
 include optional=true "dms/cursor.kdl"
 include optional=true "dms/windowrules.kdl"
+include optional=true "dms/wpblur.kdl"
+include optional=true "dms/input.kdl"
+include optional=true "dms/outputs.kdl"
 
 // Profile-scoped user customizations. Catdot seeds these files once.
 include optional=true "custom/catos-niri-dms/input.kdl"
