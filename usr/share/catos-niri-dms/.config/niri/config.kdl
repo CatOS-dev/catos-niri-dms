@@ -20,10 +20,14 @@ include optional=true "dms/binds.kdl"
 include optional=true "dms/cursor.kdl"
 include optional=true "dms/windowrules.kdl"
 include optional=true "dms/wpblur.kdl"
-include optional=true "dms/input.kdl"
 include optional=true "dms/outputs.kdl"
 
 // Profile-scoped user customizations. Catdot seeds these files once.
+// Legacy seeded input provides keyboard defaults and device fallback settings.
+// DMS input must follow it: niri replaces pointing-device sections as a whole.
 include optional=true "custom/catos-niri-dms/input.kdl"
+include optional=true "dms/input.kdl"
+// Explicit user device overrides take precedence over DMS.
+include optional=true "custom/catos-niri-dms/input-overrides.kdl"
 include optional=true "custom/catos-niri-dms/outputs.kdl"
 include optional=true "custom/catos-niri-dms/rules.kdl"

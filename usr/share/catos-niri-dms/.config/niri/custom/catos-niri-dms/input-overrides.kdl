@@ -1,0 +1,11 @@
+// Optional user input overrides applied AFTER DMS-generated input.kdl.
+// Use this file for pointing-device settings that should take precedence over
+// DMS controls. The legacy input.kdl is applied BEFORE DMS to retain its
+// keyboard settings and provide fallback pointing-device settings.
+//
+// Example:
+// input {
+//     touchpad {
+//         accel-speed 0.2
+//     }
+// }
