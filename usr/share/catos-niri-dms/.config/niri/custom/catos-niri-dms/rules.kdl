@@ -6,3 +6,12 @@
 //     match app-id="example"
 //     open-floating true
 // }
+
+// If you enable "Duplicate Wallpaper with Blur" in DMS, uncomment this
+// later rule so the normal wallpaper remains sharp on the desktop and the
+// blurred duplicate is used for the overview backdrop. Re-comment it when
+// disabling the DMS option to show the normal wallpaper in the overview.
+// layer-rule {
+//     match namespace="^quickshell$"
+//     place-within-backdrop false
+// }

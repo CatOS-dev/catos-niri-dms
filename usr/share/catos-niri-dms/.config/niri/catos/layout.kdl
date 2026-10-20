@@ -35,6 +35,14 @@ overview {
     }
 }
 
+// DMS defaults to a single (unblurred) wallpaper surface. Show it in the
+// overview backdrop. See custom/catos-niri-dms/rules.kdl for the alternate
+// "Duplicate Wallpaper with Blur" mode.
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+
 layer-rule {
     match namespace="^dms:blurwallpaper$"
     place-within-backdrop true
